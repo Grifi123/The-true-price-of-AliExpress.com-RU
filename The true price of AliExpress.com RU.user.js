@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         The true price of AliExpress.com RU
 // @namespace    https://vk.com/id127306664
-// @version      1.2
+// @version      1.3
 // @description  Shows the cost of goods with delivery. Now working only with the ruble.
 // @author       Grifi
 // @match        *.aliexpress.com/*
@@ -23,7 +23,7 @@
         } else if(price.length != 1 && pricett.indexOf('-') != -1){
             var pricet=pricett.substr(0, pricett.indexOf('-')-1);
             var prices = price.eq(1).text().substr(0, price.eq(1).text().length - 5);
-            var pricets = Number(pricet.replace(",", "."))+Number(prices.replace(",", "."));
+            var pricets = Number(pricet.replace(",", ".").replace(/\s/g, ''))+Number(prices.replace(",", ".").replace(/\s/g, ''));
             $(".infoprice").eq(i).html('<span style="color: red;font-weight: 700;font-size: 16px;">↓'+pricets.toFixed(2)+' руб</span>'+body);
             pricet=pricett.substr(pricett.indexOf('-')+1);
             pricets = Number(pricet.replace(",", ".").replace(/\s/g, ''))+Number(prices.replace(",", ".").replace(/\s/g, ''));
